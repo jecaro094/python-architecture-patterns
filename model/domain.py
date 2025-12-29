@@ -4,7 +4,7 @@ from typing import List, Optional, Set
 from uuid import UUID, uuid4
 
 import constants as const
-import exceptions as ex
+import model.exceptions as ex
 
 # @dataclass(frozen=True) # solo sirve si se usan atributos de clase, y no de objeto
 
@@ -17,6 +17,11 @@ class OrderLine:
         self.sku = sku
         self.quantity = quantity
 
+    def __repr__(self):
+        return (
+            f"OrderLine(reference='{self.reference}', "
+            f"sku='{self.sku}', quantity='{self.quantity}')"
+        )
 
 # NOTE This is a VALUE OBJECT: those identified uniquely by the data it holds (in its attributes)
 # @dataclass(frozen=True)
@@ -94,6 +99,7 @@ class Batch:
         return self_eta > other_eta
 
 
+# NOTE Domain service
 def allocate(line: OrderLine, batches: List[Batch]) -> UUID:
     """
     Given a list of batches in `batches`, this functions allocates the given 'line'

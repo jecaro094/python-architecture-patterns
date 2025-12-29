@@ -5,8 +5,8 @@ from datetime import datetime
 import pytest
 
 import constants as const
-import exceptions as ex
-from domain import Batch, OrderLine, allocate
+import model.exceptions as ex
+from model.domain import Batch, OrderLine, allocate
 
 # NOTE Tests basic domain behaviour
 
