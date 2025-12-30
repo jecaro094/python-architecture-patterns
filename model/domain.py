@@ -111,11 +111,13 @@ def allocate(line: OrderLine, batches: List[Batch]) -> UUID:
     # priority_batch = next(iter(ordered_batches))
 
     # NOTE Improvement from the book
-    priority_batch = next(b for b in sorted(batches) if b.can_allocate(line))
+    batches_allocate_ok = (b for b in sorted(batches) if b.can_allocate(line))
 
-    priority_batch.allocate(order_line=line)
-    return priority_batch.reference
+    if (priority_batch := next(batches_allocate_ok, None)):
+        priority_batch.allocate(order_line=line)
+        return priority_batch.reference
 
+    raise ex.AllocationException(const.ALLOCATE_ERROR_MSG)
 
 def deallocate(line: OrderLine, batches: List[Batch]) -> UUID:
     batches_deallocate_ok = (b for b in sorted(batches) if b.can_deallocate(line))
