@@ -40,6 +40,7 @@ def test_allocate_ok():
     fake_repo = FakeRepoOK()
     reference_res = allocate(line, fake_repo)
 
+    # NOTE To me improved this check in test
     assert next(iter(test_const.BATCHES_IN_DB_MOCK_OK)).reference == reference_res
 
 def test_allocate_exception():
@@ -53,4 +54,6 @@ def test_allocate_exception():
         allocate(line, fake_repo)
 
     assert str(exc_info.value) == const.ALLOCATE_ERROR_MSG
+
+    # NOTE To me improved this check in test
     assert next(iter(test_const.BATCHES_IN_DB_MOCK_KO)).quantity == 20

@@ -77,7 +77,7 @@ class Batch:
         return order_line.sku == self.sku and order_line in self.orders
 
     def can_allocate(self, order_line: OrderLine):
-        return order_line.sku == self.sku and order_line not in self.orders
+        return order_line.sku == self.sku and order_line not in self.orders and self.quantity >= order_line.quantity
 
     # NOTE Mine (first version, not that bad)
     # def __gt__(self, other):
