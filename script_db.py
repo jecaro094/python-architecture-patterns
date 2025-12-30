@@ -42,10 +42,11 @@ batches = [
 
 session = next(get_db())
 
+
+delete_from_all_tables(session)
+
 # insert_orders(lines, session)
 insert_batches(batches, session)
-
-# delete_from_all_tables(session)
 
 session.commit()
 session.close()

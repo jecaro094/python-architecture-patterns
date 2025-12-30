@@ -52,7 +52,7 @@ batches = Table(
 # every engine will be empty, without tables
 # NOTE Singleton is handled by sqlalchemy function `create_engine`; there is no
 # need to do anything...
-engine = create_engine(DB_URL, isolation_level="AUTOCOMMIT")
+engine = create_engine(DB_URL).execution_options(isolation_level="AUTOCOMMIT")
 
 def create_metadata():
     metadata.create_all(engine)
@@ -81,11 +81,7 @@ class SqliteRepo(AbstractRepository):
         self.session = session
 
     def add(self, order_line: OrderLine, batch_id: UUID):
-        # self.session.add(order_line)
-        batch_to_update = self.session.query(Batch).filter_by(reference=batch_id).first()
-        batch_to_update.orders.add(order_line)
-        # self.session.commit()
-        # print(f'batch_to_update={batch_to_update}')
+        self.session.commit() #uow pattern... to be improved?
 
     def get():
         pass

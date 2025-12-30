@@ -74,7 +74,7 @@ class Batch:
         self.quantity += order_line.quantity
 
     def can_deallocate(self, order_line: OrderLine):
-        return order_line in self.orders
+        return order_line.sku == self.sku and order_line in self.orders
 
     def can_allocate(self, order_line: OrderLine):
         return order_line.sku == self.sku and order_line not in self.orders
@@ -115,3 +115,13 @@ def allocate(line: OrderLine, batches: List[Batch]) -> UUID:
 
     priority_batch.allocate(order_line=line)
     return priority_batch.reference
+
+
+def deallocate(line: OrderLine, batches: List[Batch]) -> UUID:
+    batches_deallocate_ok = (b for b in sorted(batches) if b.can_deallocate(line))
+
+    if (priority_batch := next(batches_deallocate_ok, None)):
+        priority_batch.deallocate(order_line=line)
+        return priority_batch.reference
+
+    raise ex.AllocationException(const.DEALLOCATE_ERROR_MSG)

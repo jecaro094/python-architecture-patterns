@@ -5,8 +5,7 @@ from uuid import UUID
 def allocate(line: dom.OrderLine, repo: AbstractRepository):
     batches = repo.list()
     reference = dom.allocate(line, batches)
+    repo.add(line, reference) # NOTE not a real add... just commit the session to refresh changes
 
-    repo.add(line, reference)
-    # If domain allocation works, update batches, and add order line
-
-    print(f'batches: {batches}')
+def deallocate(line: dom.OrderLine, repo: AbstractRepository):
+    pass
