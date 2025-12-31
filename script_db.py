@@ -30,10 +30,10 @@ def delete_from_all_tables(session):
     delete_lines(session)
     delete_relations(session)
 
-lines = {
-    OrderLine(sku='sku_1', quantity=5),
-    OrderLine(sku='sku_2', quantity=12)
-}
+# lines = {
+#     OrderLine(sku='sku_1', quantity=5),
+#     OrderLine(sku='sku_2', quantity=12)
+# }
 
 batches = [
     # Batch(sku='sku_1', quantity=12, orders=lines),
