@@ -11,4 +11,9 @@ def allocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
 
 
 def deallocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
-    return uuid4()
+
+    batches = repo.list()
+    reference = dom.deallocate(line, batches)
+    repo.remove(line.reference)
+
+    return reference
