@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
 class SerializerBase(BaseModel):
@@ -6,6 +7,8 @@ class SerializerBase(BaseModel):
     def json(self):
         return self.__dict__
     
-class OrderLineInput(SerializerBase):
+class OrderLineSerializer(SerializerBase):
     sku: str
     quantity: int
+    reference: UUID
+
