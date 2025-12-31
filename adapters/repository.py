@@ -11,7 +11,7 @@ class AbstractRepository(ABC):
         ...
     
     @abstractmethod
-    def get(self) -> None:
+    def remove(self, reference: UUID) -> None:
         ...
 
     @abstractmethod

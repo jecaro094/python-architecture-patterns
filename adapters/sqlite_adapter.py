@@ -81,10 +81,12 @@ class SqliteRepo(AbstractRepository):
         self.session = session
 
     def add(self, order_line: OrderLine, batch_id: UUID):
-        self.session.commit() #uow pattern... to be improved?
+        self.session.commit() # NOTE uow pattern... logic to be improved?
 
-    def get():
-        pass
+    def remove(self, reference: UUID):
+        obj = self.session.query(OrderLine).filter_by(reference=reference).first()
+        self.session.delete(obj)
+        self.session.commit()
 
     def list(self) -> List[Batch]:
         return self.session.query(Batch).all()
