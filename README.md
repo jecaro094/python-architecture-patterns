@@ -35,7 +35,7 @@ pytest  # Test configuration in `pyproject.toml` file
 Execute python script so that you can populate / manipulate local sqlite database used for the example:
 
 ```bash
-python3 db_script.py
+python3 ./script_db.py
 ```
 
 You can connect to database using a tool like dbeaver. Connect to sqlite database, and use folder location (path) to access the database (`mydb.sqlite` in my case, in my github repo path).
