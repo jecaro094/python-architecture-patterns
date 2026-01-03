@@ -8,7 +8,7 @@ from exception_handler import ExceptionMiddleware
 from uuid import uuid4
 
 
-app = FastAPI()
+app = FastAPI() # Supports asgi (async) instead of wsgi (django / sync)
 
 app.add_middleware(ExceptionMiddleware)
 

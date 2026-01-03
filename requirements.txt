@@ -3,3 +3,4 @@ pre-commit
 fastapi
 uvicorn
 SQLAlchemy==2.0.45
+httpx

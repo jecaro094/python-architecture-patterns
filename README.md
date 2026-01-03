@@ -6,8 +6,8 @@ Repository to apply principles in `Architecture Patterns with Python` book
 Install dependencies using this command:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv .venv   # Create virtual environment
+source .venv/bin/activate   # Activate virtual environment
 ```
 
 ## Execute locally
@@ -27,7 +27,7 @@ localhost:8000/docs
 ## Execute tests
 
 ```bash
-pytest
+pytest  # Test configuration in `pyproject.toml` file
 ```
 
 ## Database Script
