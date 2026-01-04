@@ -5,9 +5,17 @@ Repository to apply principles in `Architecture Patterns with Python` book
 
 Install dependencies using this command:
 
+In order to create and activate a virtual environment:
+
 ```bash
 python3 -m venv .venv   # Create virtual environment
 source .venv/bin/activate   # Activate virtual environment
+```
+
+And, in order to install pip dependencies from requirements file:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Execute locally
