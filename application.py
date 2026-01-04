@@ -1,11 +1,13 @@
+from typing import List
+
 from fastapi import Depends, FastAPI
 from fastapi.responses import JSONResponse
 
 import services as serv
 from adapters.sqlite_adapter import SqliteRepo, create_metadata, get_db, start_mappers
 from exception_handler import ExceptionMiddleware
-from model.domain import OrderLine
-from serializers.input_application import OrderLineSerializer
+from model.domain import Batch, OrderLine
+from serializers.input_serializers import OperationInputSerializer
 
 app = FastAPI()  # Supports asgi (async) instead of wsgi (django / sync)
 
@@ -19,7 +21,7 @@ def on_startup():
 
 
 @app.post("/allocate")
-def allocate(line: OrderLineSerializer, session=Depends(get_db)):
+def allocate(line: OperationInputSerializer, session=Depends(get_db)):
     """
     Docstring for allocate
 
@@ -39,7 +41,7 @@ def allocate(line: OrderLineSerializer, session=Depends(get_db)):
 
 
 @app.post("/deallocate")
-def deallocate(line: OrderLineSerializer, session=Depends(get_db)):
+def deallocate(line: OperationInputSerializer, session=Depends(get_db)):
     """
     Docstring for allocate
 
@@ -57,3 +59,21 @@ def deallocate(line: OrderLineSerializer, session=Depends(get_db)):
         )
     }
     return JSONResponse(content=message)
+
+
+@app.get("/batch", response_model=None)
+def batches(session=Depends(get_db)) -> List[Batch]:
+    """
+    Retrieves batches from database
+    """
+    repo = SqliteRepo(session)
+    return serv.get_batches(repo)
+
+
+@app.get("/order_line", response_model=None)
+def order_lines(session=Depends(get_db)) -> List[OrderLine]:
+    """
+    Retrieves batches from database
+    """
+    repo = SqliteRepo(session)
+    return serv.get_order_lines(repo)

@@ -88,5 +88,8 @@ class SqliteRepo(AbstractRepository):
         self.session.delete(obj)
         self.session.commit()
 
-    def list(self) -> List[Batch]:
+    def list_batches(self) -> List[Batch]:
         return self.session.query(Batch).all()
+    
+    def list_order_lines(self) -> List[OrderLine]:
+        return self.session.query(OrderLine).all()

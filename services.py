@@ -1,3 +1,4 @@
+from typing import List
 from uuid import UUID
 
 import model.domain as dom
@@ -5,7 +6,7 @@ from adapters.repository import AbstractRepository
 
 
 def allocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
-    batches = repo.list()
+    batches = repo.list_batches()
 
     reference = dom.allocate(line, batches)
     repo.add(
@@ -15,8 +16,16 @@ def allocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
 
 
 def deallocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
-    batches = repo.list()
+    batches = repo.list_batches()
     reference = dom.deallocate(line, batches)
     repo.remove(line.reference)
 
     return reference
+
+
+def get_batches(repo: AbstractRepository) -> List[dom.Batch]:
+    return repo.list_batches()
+
+
+def get_order_lines(repo: AbstractRepository) -> List[dom.OrderLine]:
+    return repo.list_order_lines()

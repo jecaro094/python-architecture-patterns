@@ -7,8 +7,9 @@ class SerializerBase(BaseModel):
     def json(self):
         return self.__dict__
     
-class OrderLineSerializer(SerializerBase):
+class OperationInputSerializer(SerializerBase):
     sku: str
     quantity: int
     reference: UUID
+
 

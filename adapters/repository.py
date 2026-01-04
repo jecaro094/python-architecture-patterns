@@ -15,5 +15,9 @@ class AbstractRepository(ABC):
         ...
 
     @abstractmethod
-    def list(self) -> List[Batch]:
+    def list_batches(self) -> List[Batch]:
+        ...
+
+    @abstractmethod
+    def list_order_lines(self) -> List[OrderLine]:
         ...
