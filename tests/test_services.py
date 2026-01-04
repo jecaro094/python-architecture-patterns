@@ -51,7 +51,7 @@ def test_deallocate_ok():
     assert deallocated_batch.reference == reference_res
 
 
-def test_allocate_exception():
+def test_deallocate_exception():
     """
     Raise exception when cannot deallocate from any batch from list.
     """
@@ -65,5 +65,3 @@ def test_allocate_exception():
 
     # NOTE To be improved this check in test
     assert next(iter(test_const.BATCHES_IN_DB_MOCK_OK)).quantity == 20
-
-# TODO Missing test for deallocate exception on this file...
