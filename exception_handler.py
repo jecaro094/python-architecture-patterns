@@ -1,9 +1,9 @@
-
-from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi.responses import JSONResponse
 from fastapi import Request
+from fastapi.responses import JSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from model import exceptions as ex
+
 
 class ExceptionMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):

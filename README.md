@@ -32,6 +32,14 @@ And access swagger trough this endpoint:
 localhost:8000/docs
 ```
 
+## Pre-commit
+
+To standardize lint, types, etc... we use this command to apply `pre-commit`, from the root folder in the repo:
+
+```bash
+pre-commit run --files *.py
+```
+
 ## Execute tests
 
 ```bash
