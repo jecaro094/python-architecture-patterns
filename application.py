@@ -8,6 +8,7 @@ from adapters.sqlite_adapter import SqliteRepo, create_metadata, get_db, start_m
 from exception_handler import ExceptionMiddleware
 from model.domain import Batch, OrderLine
 from serializers.input_serializers import OperationInputSerializer
+from utils import transform_batch
 
 app = FastAPI()  # Supports asgi (async) instead of wsgi (django / sync)
 

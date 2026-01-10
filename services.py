@@ -3,7 +3,7 @@ from uuid import UUID
 
 import model.domain as dom
 from adapters.repository import AbstractRepository
-
+from utils import transform_batch
 
 def allocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
     batches = repo.list_batches()
@@ -24,7 +24,8 @@ def deallocate(line: dom.OrderLine, repo: AbstractRepository) -> UUID:
 
 
 def get_batches(repo: AbstractRepository) -> List[dom.Batch]:
-    return repo.list_batches()
+    batches = repo.list_batches()
+    return [transform_batch(b) for b in batches]
 
 
 def get_order_lines(repo: AbstractRepository) -> List[dom.OrderLine]:

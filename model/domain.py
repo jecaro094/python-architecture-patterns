@@ -32,8 +32,11 @@ class Batch:
         self.reference = uuid4()
         self.sku = sku
         self.quantity = quantity
-        self.orders = orders
         self.eta = eta
+        self.orders = orders
+
+    def set_reference(self, reference: UUID):
+        self.reference = reference
 
     def __repr__(self):
         return (
