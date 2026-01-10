@@ -79,3 +79,33 @@ def test_deallocate_400():
 
     assert response.status_code == 400
     assert response.json() == {"detail": "Cannot deallocate"}
+
+
+@patch('application.SqliteRepo', test_utils.FakeRepoAllocateOK) # TODO Improve naming in fake repo
+def test_get_order_lines_200():
+    """
+    Basic case in which we retrieve order lines.
+    We check that the response is a non-empty list.
+    """
+    response = client.get(
+        "/order_line/",
+    )
+
+    assert response.status_code == 200
+    assert response.json()
+
+@patch('application.SqliteRepo', test_utils.FakeRepoAllocateOK) # TODO Improve naming in fake repo
+def test_get_batches_200():
+    """
+    Basic case in which we retrieve batches.
+    We check that the response is a non-empty list.
+    """
+    response = client.get(
+        "/batch/",
+    )
+
+    assert response.status_code == 200
+    assert response.json()
+
+
+# TODO Write error tests for get batches and order lines
